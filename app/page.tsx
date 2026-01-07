@@ -1,65 +1,149 @@
-import Image from "next/image";
+"use client";
+
+import { useAppStore } from "@/store/useAppStore";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { Plus, FolderOpen, Trash2 } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
+  const { projects, createProject, deleteProject, loadProject } = useAppStore();
+  const [newProjectName, setNewProjectName] = useState("");
+  const [showNewProject, setShowNewProject] = useState(false);
+
+  const handleCreateProject = () => {
+    if (newProjectName.trim()) {
+      createProject(newProjectName.trim());
+      setNewProjectName("");
+      setShowNewProject(false);
+    }
+  };
+
+  const handleDeleteProject = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (confirm("Are you sure you want to delete this project?")) {
+      deleteProject(id);
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-2">Cabinet Builder</h1>
+          <p className="text-muted-foreground">
+            Design custom cabinets with 3D visualization and automated cut lists
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div className="mb-6">
+          <Button
+            onClick={() => setShowNewProject(!showNewProject)}
+            className="gap-2"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Plus className="h-4 w-4" />
+            New Project
+          </Button>
         </div>
-      </main>
+
+        {showNewProject && (
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle>Create New Project</CardTitle>
+              <CardDescription>
+                Enter a name for your new cabinet design project
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <Label htmlFor="project-name">Project Name</Label>
+                  <Input
+                    id="project-name"
+                    value={newProjectName}
+                    onChange={(e) => setNewProjectName(e.target.value)}
+                    placeholder="e.g., Kitchen Cabinets"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleCreateProject();
+                      }
+                      if (e.key === "Escape") {
+                        setShowNewProject(false);
+                        setNewProjectName("");
+                      }
+                    }}
+                    autoFocus
+                  />
+                </div>
+                <div className="flex items-end gap-2">
+                  <Button onClick={handleCreateProject}>Create</Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setShowNewProject(false);
+                      setNewProjectName("");
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {projects.length === 0 ? (
+            <Card className="col-span-full">
+              <CardContent className="pt-6">
+                <p className="text-center text-muted-foreground">
+                  No projects yet. Create your first project to get started!
+                </p>
+              </CardContent>
+            </Card>
+          ) : (
+            projects.map((project) => (
+              <Card
+                key={project.id}
+                className="cursor-pointer hover:shadow-lg transition-shadow"
+              >
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <CardTitle className="text-lg">{project.name}</CardTitle>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => handleDeleteProject(project.id, e)}
+                      className="h-8 w-8 text-destructive hover:text-destructive"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  <CardDescription>
+                    {project.units.length} unit{project.units.length !== 1 ? "s" : ""}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col gap-2">
+                    <p className="text-sm text-muted-foreground">
+                      Updated: {new Date(project.updatedAt).toLocaleDateString()}
+                    </p>
+                    <Link href={`/project/${project.id}`}>
+                      <Button className="w-full gap-2" variant="outline">
+                        <FolderOpen className="h-4 w-4" />
+                        Open Project
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 }
