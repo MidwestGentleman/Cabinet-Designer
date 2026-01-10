@@ -1,0 +1,538 @@
+{
+    "project": "Cabinet Builder",
+    "branchName": "ralph/cabinet-builder-mvp",
+    "description": "Cabinet Builder MVP - Complete feature set including 3D visualization, cut list generation, optimization, and export/import",
+    "userStories": [
+        {
+            "id": "US-001",
+            "title": "Project management - Create new project",
+            "description": "As a user, I want to create a new project so that I can start designing my cabinet.",
+            "acceptanceCriteria": [
+                "User can click 'New Project' button",
+                "Dialog/form appears for project name input",
+                "Project is created with unique ID and saved to store",
+                "Project persists in localStorage",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 1,
+            "passes": true,
+            "notes": "Implemented in app/page.tsx"
+        },
+        {
+            "id": "US-002",
+            "title": "Project management - List saved projects",
+            "description": "As a user, I want to see my saved projects so that I can continue working on them.",
+            "acceptanceCriteria": [
+                "Home page displays all saved projects",
+                "Each project shows name and last modified date",
+                "Projects are sorted by last modified (newest first)",
+                "Empty state shown when no projects exist",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 2,
+            "passes": true,
+            "notes": "Implemented in app/page.tsx"
+        },
+        {
+            "id": "US-003",
+            "title": "Project management - Delete project",
+            "description": "As a user, I want to delete projects so that I can remove designs I no longer need.",
+            "acceptanceCriteria": [
+                "Delete button visible on each project card",
+                "Confirmation dialog appears before deletion",
+                "Project is removed from store and localStorage",
+                "Project list updates immediately after deletion",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 3,
+            "passes": true,
+            "notes": "Implemented in app/page.tsx"
+        },
+        {
+            "id": "US-004",
+            "title": "Unit configuration - Add cabinet unit with dimensions",
+            "description": "As a user, I want to enter cabinet dimensions so that the cabinet fits my space.",
+            "acceptanceCriteria": [
+                "Form accepts width, height, depth inputs",
+                "Inputs accept decimal and fraction formats",
+                "Validation prevents invalid dimensions (negative, too small, too large)",
+                "Unit is added to project when form submitted",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 4,
+            "passes": true,
+            "notes": "Implemented in app/project/[id]/page.tsx"
+        },
+        {
+            "id": "US-005",
+            "title": "Unit configuration - Configure cabinet shelves",
+            "description": "As a user, I want to configure shelves so that I can organize the interior.",
+            "acceptanceCriteria": [
+                "Form allows setting number of shelves (0-10)",
+                "Shelf count validation works correctly",
+                "Shelves are saved with unit configuration",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 5,
+            "passes": true,
+            "notes": "Implemented in app/project/[id]/page.tsx"
+        },
+        {
+            "id": "US-006",
+            "title": "Unit configuration - Configure drawer stack",
+            "description": "As a user, I want to configure drawers so that I can design drawer systems.",
+            "acceptanceCriteria": [
+                "Form allows switching between cabinet and drawer mode",
+                "Form allows setting number of drawers (1-10)",
+                "Drawer count validation works correctly",
+                "Drawers are saved with unit configuration",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 6,
+            "passes": true,
+            "notes": "Implemented in app/project/[id]/page.tsx"
+        },
+        {
+            "id": "US-007",
+            "title": "Measurement utilities - Decimal to fraction conversion",
+            "description": "As a developer, I need measurement conversion utilities so that users can input measurements in either format.",
+            "acceptanceCriteria": [
+                "decimalToFraction() converts 24.5 to '24 1/2'",
+                "fractionToDecimal() converts '24 1/2' to 24.5",
+                "formatMeasurement() formats with quotes",
+                "parseMeasurement() handles both formats",
+                "All functions handle edge cases correctly",
+                "Typecheck passes",
+                "Unit tests pass"
+            ],
+            "priority": 7,
+            "passes": true,
+            "notes": "Implemented in lib/measurements.ts with comprehensive tests"
+        },
+        {
+            "id": "US-008",
+            "title": "Material settings - Add material thickness selector",
+            "description": "As a user, I want to configure material thickness so that cut lists use the correct material specifications.",
+            "acceptanceCriteria": [
+                "Add material thickness selector dropdown (1/4\", 1/2\", 5/8\", 3/4\")",
+                "Selector updates project.settings.materialThickness",
+                "Default value is 3/4\" (0.75)",
+                "Settings persist across sessions",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 8,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-009",
+            "title": "Material settings - Add material type selector",
+            "description": "As a user, I want to configure material type so that cut lists reference the correct material.",
+            "acceptanceCriteria": [
+                "Add material type selector dropdown (Plywood, MDF, Hardwood, Other)",
+                "Selector updates project.settings.materialType",
+                "Default value is 'plywood'",
+                "Settings persist across sessions",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 9,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-010",
+            "title": "3D Visualization - Set up React Three Fiber scene",
+            "description": "As a developer, I need to set up a basic React Three Fiber scene so that 3D cabinet models can be rendered.",
+            "acceptanceCriteria": [
+                "Create Canvas component in project workspace",
+                "Configure camera (perspective camera with appropriate position and FOV)",
+                "Add OrbitControls for camera interaction (orbit, pan, zoom)",
+                "Add ambient and directional lighting",
+                "Add grid helper and axes helper",
+                "Scene renders without errors",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 10,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-011",
+            "title": "3D Visualization - Create parametric geometry engine for cabinet box",
+            "description": "As a developer, I need to generate 3D geometry for a basic cabinet box (top, bottom, sides, back) so that the cabinet structure can be visualized.",
+            "acceptanceCriteria": [
+                "Create function to generate box geometry from dimensions",
+                "Account for material thickness in internal dimensions (subtract 2× thickness from width/height/depth)",
+                "Generate separate geometries for: top, bottom, left side, right side, back panel",
+                "All panels use correct dimensions from unit configuration",
+                "Geometry generation handles edge cases (min/max dimensions)",
+                "Typecheck passes",
+                "Unit tests pass"
+            ],
+            "priority": 11,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-012",
+            "title": "3D Visualization - Render cabinet box in 3D scene",
+            "description": "As a user, I want to see the cabinet box structure in 3D so that I can visualize the basic cabinet shape.",
+            "acceptanceCriteria": [
+                "Cabinet box renders in 3D scene",
+                "All panels (top, bottom, sides, back) are visible",
+                "Model updates when unit dimensions change",
+                "Model updates within 500ms of parameter change",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 12,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-013",
+            "title": "3D Visualization - Generate shelf geometry",
+            "description": "As a developer, I need to generate 3D geometry for cabinet shelves so that shelves can be visualized in the 3D model.",
+            "acceptanceCriteria": [
+                "Create function to generate shelf geometry",
+                "Calculate shelf dimensions (width accounts for material thickness, depth matches cabinet depth)",
+                "Generate geometry for each shelf based on numShelves",
+                "Position shelves correctly based on shelf spacing (auto-calculated or manual)",
+                "Handle edge case: 0 shelves (no shelf geometry generated)",
+                "Typecheck passes",
+                "Unit tests pass"
+            ],
+            "priority": 13,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-014",
+            "title": "3D Visualization - Render shelves in 3D scene",
+            "description": "As a user, I want to see shelves in my cabinet so that I can visualize the interior organization.",
+            "acceptanceCriteria": [
+                "Shelves render in 3D scene when numShelves > 0",
+                "Shelves are positioned correctly within cabinet",
+                "Shelves update when numShelves changes",
+                "Shelves update when cabinet dimensions change",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 14,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-015",
+            "title": "3D Visualization - Generate drawer geometry",
+            "description": "As a developer, I need to generate 3D geometry for drawer boxes so that drawers can be visualized in the 3D model.",
+            "acceptanceCriteria": [
+                "Create function to generate drawer box geometry",
+                "Calculate drawer dimensions (accounts for material thickness)",
+                "Generate geometry for each drawer based on numDrawers",
+                "Position drawers correctly (stacked vertically)",
+                "Handle edge case: 0 drawers",
+                "Typecheck passes",
+                "Unit tests pass"
+            ],
+            "priority": 15,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-016",
+            "title": "3D Visualization - Render drawers in 3D scene",
+            "description": "As a user, I want to see drawers in my drawer stack so that I can visualize the drawer configuration.",
+            "acceptanceCriteria": [
+                "Drawers render in 3D scene when unit type is 'drawer'",
+                "Drawers are positioned correctly (stacked)",
+                "Drawers update when numDrawers changes",
+                "Drawers update when unit dimensions change",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 16,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-017",
+            "title": "3D Visualization - Add camera controls UI",
+            "description": "As a user, I want to control the 3D camera so that I can view the cabinet from different angles.",
+            "acceptanceCriteria": [
+                "OrbitControls allow mouse drag to orbit",
+                "Mouse wheel zooms in/out",
+                "Right-click drag pans the view",
+                "Controls are responsive (60fps)",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 17,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-018",
+            "title": "3D Visualization - Add view controls (grid, axes, reset)",
+            "description": "As a user, I want to toggle grid/axes visibility and reset the camera so that I can customize my view.",
+            "acceptanceCriteria": [
+                "Toggle button for grid visibility",
+                "Toggle button for axes visibility",
+                "Reset camera button returns to default view",
+                "Fit to view button adjusts camera to show entire model",
+                "Settings persist in UI state",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 18,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-019",
+            "title": "Cut List - Create cut list generation function",
+            "description": "As a developer, I need to extract all parts from a cabinet design so that a cut list can be generated.",
+            "acceptanceCriteria": [
+                "Create function that takes Project and returns CutList",
+                "Extract all parts: top, bottom, left side, right side, back, shelves, drawer parts",
+                "Calculate correct dimensions for each part (accounting for material thickness)",
+                "Generate part names (e.g., 'Top Panel', 'Shelf 1', 'Drawer Front 1')",
+                "Calculate quantities correctly",
+                "Handle both cabinet and drawer units",
+                "Typecheck passes",
+                "Unit tests pass"
+            ],
+            "priority": 19,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-020",
+            "title": "Cut List - Display cut list in table format",
+            "description": "As a user, I want to see a table of all parts I need to cut so that I know what materials to prepare.",
+            "acceptanceCriteria": [
+                "Create cut list table component",
+                "Display columns: Part Name, Width, Height, Quantity, Material",
+                "Format measurements as fractions (e.g., '24 1/2\"')",
+                "Table is sortable by column",
+                "Table is filterable by part type",
+                "Empty state when no units configured",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 20,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-021",
+            "title": "Cut List - Add cut list view toggle",
+            "description": "As a user, I want to switch between design view and cut list view so that I can see different aspects of my project.",
+            "acceptanceCriteria": [
+                "Add view toggle in project workspace (Design | Cut List)",
+                "Cut list view displays when selected",
+                "Design view displays when selected",
+                "View selection persists in UI state",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 21,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-022",
+            "title": "Cut List Optimization - Implement 2D bin packing algorithm",
+            "description": "As a developer, I need to implement a bin packing algorithm so that pieces can be optimally placed on 4' x 8' sheets.",
+            "acceptanceCriteria": [
+                "Create bin packing function for 48\" x 96\" sheets",
+                "Algorithm places pieces to minimize waste",
+                "Algorithm minimizes number of sheets required",
+                "Handles piece rotation (90° only)",
+                "Returns SheetLayout[] with piece positions (x, y, rotation)",
+                "Calculates waste percentage per sheet",
+                "Algorithm completes in < 10 seconds for typical projects",
+                "Typecheck passes",
+                "Unit tests pass"
+            ],
+            "priority": 22,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-023",
+            "title": "Cut List Optimization - Visualize sheet layouts",
+            "description": "As a user, I want to see how pieces are arranged on each sheet so that I can cut efficiently.",
+            "acceptanceCriteria": [
+                "Create 2D canvas visualization of sheet layouts",
+                "Draw sheet boundaries (48\" x 96\")",
+                "Draw each piece with correct dimensions and position",
+                "Show piece labels/names",
+                "Display waste area visually (different color)",
+                "Show utilization percentage per sheet",
+                "Support multiple sheets (tabs or pagination)",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 23,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-024",
+            "title": "Cut List Optimization - Add optimization UI and controls",
+            "description": "As a user, I want to trigger cut list optimization so that I can see the optimal sheet layouts.",
+            "acceptanceCriteria": [
+                "Add 'Generate Layout' button to cut list view",
+                "Show optimization progress indicator",
+                "Display results: number of sheets, total waste percentage",
+                "Show sheet layouts after optimization completes",
+                "Handle optimization errors gracefully",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 24,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-025",
+            "title": "Export - Implement project export functionality",
+            "description": "As a user, I want to export my project to a file so that I can save it for later editing.",
+            "acceptanceCriteria": [
+                "Create export function that serializes Project to JSON",
+                "Include project metadata (name, id, createdAt, updatedAt, version)",
+                "Include all design parameters and settings",
+                "Include all unit configurations",
+                "Add version field to exported JSON (e.g., '1.0.0')",
+                "Trigger file download with .cabinet or .json extension",
+                "File size reasonable (< 1MB for typical projects)",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 25,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-026",
+            "title": "Export - Add export button to UI",
+            "description": "As a user, I want an export button in the UI so that I can easily save my project.",
+            "acceptanceCriteria": [
+                "Add 'Export Project' button to project workspace",
+                "Button triggers file download",
+                "Button is clearly labeled and accessible",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 26,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-027",
+            "title": "Import - Implement project import functionality",
+            "description": "As a user, I want to import a previously exported project so that I can continue editing it.",
+            "acceptanceCriteria": [
+                "Create file upload input component",
+                "Parse JSON file and validate structure",
+                "Check version compatibility",
+                "Load project into store (replace current or create new)",
+                "Show success message on successful import",
+                "Show clear error messages for invalid files",
+                "Update 3D model after import",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 27,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-028",
+            "title": "Import - Add import button to UI",
+            "description": "As a user, I want an import button in the UI so that I can easily load a saved project.",
+            "acceptanceCriteria": [
+                "Add 'Import Project' button to project workspace or home page",
+                "Button triggers file picker dialog",
+                "Button is clearly labeled and accessible",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 28,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-029",
+            "title": "Multi-Unit - Display multiple units in project",
+            "description": "As a user, I want to see all units in my project so that I can manage multiple cabinets.",
+            "acceptanceCriteria": [
+                "Project workspace displays list of all units",
+                "Each unit shows type (cabinet/drawer) and dimensions",
+                "Units can be selected for editing",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 29,
+            "passes": false,
+            "notes": "Partially implemented - units are stored but UI needs enhancement"
+        },
+        {
+            "id": "US-030",
+            "title": "Multi-Unit - Remove unit from project",
+            "description": "As a user, I want to remove units from my project so that I can modify my design.",
+            "acceptanceCriteria": [
+                "Add remove/delete button for each unit",
+                "Confirmation dialog before deletion",
+                "Unit is removed from project.units array",
+                "Project updates correctly after removal",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 30,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-031",
+            "title": "3D Visualization - Add measurement display on hover",
+            "description": "As a user, I want to see part dimensions when hovering over parts in the 3D view so that I can verify measurements.",
+            "acceptanceCriteria": [
+                "Hovering over a part shows tooltip with dimensions",
+                "Dimensions displayed as fractions (e.g., '24 1/2\" × 34 1/2\"')",
+                "Tooltip is readable and doesn't obstruct view",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 31,
+            "passes": false,
+            "notes": ""
+        },
+        {
+            "id": "US-032",
+            "title": "3D Visualization - Add part selection and details",
+            "description": "As a user, I want to select parts in the 3D view so that I can see detailed information about them.",
+            "acceptanceCriteria": [
+                "Clicking a part selects it",
+                "Selected part is highlighted visually",
+                "Part details panel shows: name, dimensions, material",
+                "Selection persists until another part is selected",
+                "Typecheck passes",
+                "Verify in browser using dev-browser skill"
+            ],
+            "priority": 32,
+            "passes": false,
+            "notes": ""
+        }
+    ]
+}

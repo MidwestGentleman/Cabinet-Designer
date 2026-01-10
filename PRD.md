@@ -40,6 +40,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Projects can be uniquely identified
 - Project list displays name and last modified date
 
+**Status**: ✅ Implemented
+
 ---
 
 #### FR-2: Parametric Cabinet Design
@@ -74,6 +76,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Real-time updates to 3D model
 - Support for multiple units in one project
 
+**Status**: ✅ Partially Implemented (form exists, needs material settings UI)
+
 ---
 
 #### FR-3: 3D Visualization
@@ -95,6 +99,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Smooth camera interactions (60fps)
 - Clear visualization of all parts
 - Responsive on desktop and tablet
+
+**Status**: ❌ Not Implemented
 
 ---
 
@@ -119,6 +125,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Switching between modes updates model immediately
 - Validation ensures drawers fit within height
 - Clear visual distinction between cabinet and drawer modes
+
+**Status**: ✅ Implemented
 
 ---
 
@@ -145,6 +153,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - All parameters preserved
 - File size reasonable (< 1MB for typical projects)
 
+**Status**: ❌ Not Implemented
+
 ---
 
 #### FR-6: Import Functionality
@@ -164,6 +174,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Shows clear error messages for invalid files
 - Preserves all design parameters
 - Updates 3D model after import
+
+**Status**: ❌ Not Implemented
 
 ---
 
@@ -189,6 +201,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Dimensions accurate to 1/16"
 - Quantities correct
 - Clear part identification
+
+**Status**: ❌ Not Implemented
 
 ---
 
@@ -217,6 +231,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Visual layout is accurate
 - Calculation completes in < 10 seconds for typical projects
 
+**Status**: ❌ Not Implemented
+
 ---
 
 ### 2.2 Secondary Features
@@ -232,6 +248,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Individual unit configuration
 - Combined cut list
 
+**Status**: ⚠️ Partially Implemented (can add multiple units, positioning not implemented)
+
 ---
 
 #### FR-10: Measurement Display
@@ -245,6 +263,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Select part to see full details
 - Dimension lines in 3D view
 
+**Status**: ❌ Not Implemented
+
 ---
 
 #### FR-11: Print Views
@@ -257,6 +277,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Print-optimized 3D views
 - Technical drawings (orthographic views)
 
+**Status**: ❌ Not Implemented
+
 ---
 
 #### FR-12: Template Library
@@ -268,6 +290,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - Common cabinet sizes
 - Standard configurations
 - Quick start options
+
+**Status**: ❌ Not Implemented
 
 ---
 
@@ -350,20 +374,28 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 - **As a** user, **I want to** name my project, **so that** I can identify it later.
 - **As a** user, **I want to** see my saved projects, **so that** I can continue working on them.
 
+**Status**: ✅ Implemented
+
 ### Epic 2: Cabinet Design
 - **As a** user, **I want to** enter cabinet dimensions, **so that** the cabinet fits my space.
 - **As a** user, **I want to** see my cabinet in 3D, **so that** I can visualize the design.
 - **As a** user, **I want to** configure shelves, **so that** I can organize the interior.
 - **As a** user, **I want to** configure drawers, **so that** I can design drawer systems.
 
+**Status**: ⚠️ Partially Implemented (form exists, 3D visualization missing)
+
 ### Epic 3: Material & Cut List
 - **As a** user, **I want to** set material thickness, **so that** cut lists are accurate.
 - **As a** user, **I want to** see a cut list, **so that** I know what to cut.
 - **As a** user, **I want to** see optimized sheet layouts, **so that** I minimize waste.
 
+**Status**: ❌ Not Implemented
+
 ### Epic 4: Save & Share
 - **As a** user, **I want to** export my project, **so that** I can save it for later.
 - **As a** user, **I want to** import a project, **so that** I can continue editing.
+
+**Status**: ❌ Not Implemented
 
 ## 5. Technical Constraints
 
@@ -456,4 +488,3 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 ## 10. Timeline & Milestones
 
 See FEATURES.md for detailed feature breakdown and delivery schedule.
-
