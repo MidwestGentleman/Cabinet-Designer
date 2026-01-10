@@ -1,4 +1,13 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cabinet Builder
+
+A web-based parametric design tool for designing custom cabinets and built-ins with 3D visualization, automated cut list generation, and optimization for standard plywood sheets.
+
+## Status
+
+![CI](https://github.com/yourusername/cabinet-builder/workflows/CI/badge.svg)
+![PR Checks](https://github.com/yourusername/cabinet-builder/workflows/PR%20Checks/badge.svg)
+
+> **Note:** Replace `yourusername/cabinet-builder` with your actual GitHub repository path to enable status badges.
 
 ## Getting Started
 
@@ -34,3 +43,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Testing
+
+This project uses a comprehensive testing strategy:
+
+- **Unit Tests:** Vitest + Testing Library
+- **E2E Tests:** Playwright
+- **Component Tests:** Storybook
+- **CI/CD:** GitHub Actions
+
+Run tests locally:
+```bash
+npm run test:all
+```
+
+See [TESTING_SETUP.md](./TESTING_SETUP.md) and [CI_CD_SETUP.md](./CI_CD_SETUP.md) for details.
+
+## CI/CD
+
+Automated testing runs on every push and pull request via GitHub Actions:
+
+- ✅ TypeScript type checking
+- ✅ ESLint code quality
+- ✅ Unit tests
+- ✅ E2E smoke tests
+- ✅ Production build validation
+
+See [CI_CD_SETUP.md](./CI_CD_SETUP.md) for complete CI/CD documentation.

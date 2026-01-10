@@ -10,7 +10,7 @@ import { Plus, FolderOpen, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
-  const { projects, createProject, deleteProject, loadProject } = useAppStore();
+  const { projects, createProject, deleteProject } = useAppStore();
   const [newProjectName, setNewProjectName] = useState("");
   const [showNewProject, setShowNewProject] = useState(false);
 
@@ -43,6 +43,7 @@ export default function Home() {
           <Button
             onClick={() => setShowNewProject(!showNewProject)}
             className="gap-2"
+            data-testid="new-project-button"
           >
             <Plus className="h-4 w-4" />
             New Project
@@ -76,16 +77,18 @@ export default function Home() {
                       }
                     }}
                     autoFocus
+                    data-testid="project-name-input"
                   />
                 </div>
                 <div className="flex items-end gap-2">
-                  <Button onClick={handleCreateProject}>Create</Button>
+                  <Button onClick={handleCreateProject} data-testid="create-project-button">Create</Button>
                   <Button
                     variant="outline"
                     onClick={() => {
                       setShowNewProject(false);
                       setNewProjectName("");
                     }}
+                    data-testid="cancel-project-button"
                   >
                     Cancel
                   </Button>

@@ -1,0 +1,23 @@
+import type { StorybookConfig } from '@storybook/nextjs-vite';
+
+const config: StorybookConfig = {
+  "stories": [
+    // Project components first (priority)
+    "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    // Example stories (can be removed later)
+    "../stories/**/*.mdx",
+    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+  ],
+  "addons": [
+    "@chromatic-com/storybook",
+    "@storybook/addon-vitest",
+    "@storybook/addon-a11y",
+    "@storybook/addon-docs",
+    "@storybook/addon-onboarding"
+  ],
+  "framework": "@storybook/nextjs-vite",
+  "staticDirs": [
+    "../public"
+  ]
+};
+export default config;

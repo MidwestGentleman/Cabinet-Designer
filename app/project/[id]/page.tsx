@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppStore } from "@/store/useAppStore";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,7 +10,6 @@ import Link from "next/link";
 
 export default function ProjectPage() {
   const params = useParams();
-  const router = useRouter();
   const { currentProject, loadProject } = useAppStore();
   const projectId = params.id as string;
 
@@ -27,7 +26,7 @@ export default function ProjectPage() {
           <CardHeader>
             <CardTitle>Project Not Found</CardTitle>
             <CardDescription>
-              The project you're looking for doesn't exist.
+              The project you&apos;re looking for doesn&apos;t exist.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -71,7 +70,7 @@ export default function ProjectPage() {
               <div>
                 <p className="text-sm font-medium">Material Thickness</p>
                 <p className="text-sm text-muted-foreground">
-                  {currentProject.settings.materialThickness}" ({currentProject.settings.materialType})
+                  {currentProject.settings.materialThickness}&quot; ({currentProject.settings.materialType})
                 </p>
               </div>
               <div>
