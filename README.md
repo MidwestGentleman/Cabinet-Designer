@@ -53,10 +53,35 @@ This project uses a comprehensive testing strategy:
 - **Component Tests:** Storybook
 - **CI/CD:** GitHub Actions
 
-Run tests locally:
+### Running Tests
+
 ```bash
+# All tests
 npm run test:all
+
+# Individual test suites
+npm run test:unit        # Unit tests only
+npm run test:integration # Integration tests only
+npm run test:e2e:smoke   # E2E smoke tests (requires browsers)
+npm run test:coverage    # Generate coverage report
 ```
+
+### Network-Restricted Environments
+
+If you're in an environment with firewall/proxy restrictions (403 errors when downloading):
+
+1. **Create `.env.local`** (already gitignored):
+   ```env
+   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+   NEXT_TURBOPACK_EXPERIMENTAL_USE_SYSTEM_TLS_CERTS=1
+   ```
+
+2. **Skip E2E tests locally** - They'll still run in CI:
+   ```bash
+   npm run test:unit  # Only run unit tests
+   ```
+
+3. **Google Fonts** - Next.js automatically falls back to system fonts if downloads fail
 
 See [TESTING_SETUP.md](./TESTING_SETUP.md) and [CI_CD_SETUP.md](./CI_CD_SETUP.md) for details.
 
