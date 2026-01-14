@@ -319,7 +319,7 @@ export default function ProjectPage() {
                             {index + 1}. {unit.type === "cabinet" ? "Cabinet" : "Drawer Stack"}
                           </p>
                           <span className="text-xs text-muted-foreground">
-                            {unit.width}" × {unit.height}" × {unit.depth}"
+                            {unit.width}&quot; × {unit.height}&quot; × {unit.depth}&quot;
                           </span>
                         </div>
                         <p className="text-xs text-muted-foreground mt-2">
