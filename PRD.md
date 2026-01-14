@@ -111,12 +111,12 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 
 **Cabinet Configuration**:
 - Toggle between cabinet and drawer mode
-- Set number of shelves (0-10)
+- Set number of shelves (0-12)
 - Auto-calculate shelf spacing or manual override
 - Display shelf positions
 
 **Drawer Configuration**:
-- Set number of drawers (1-10)
+- Set number of drawers (1-12)
 - Auto-distribute drawer heights or manual specification
 - Display drawer positions
 - Show drawer front dimensions
@@ -413,8 +413,8 @@ Cabinet Builder is a web-based parametric design tool that enables DIY enthusias
 ### 5.3 Design Constraints
 - Minimum cabinet dimensions: 12" width, 12" height, 12" depth
 - Maximum cabinet dimensions: 96" width, 96" height, 24" depth
-- Maximum drawers: 10 per unit
-- Maximum shelves: 10 per cabinet
+- Maximum drawers: 12 per unit
+- Maximum shelves: 12 per cabinet
 
 ## 6. Success Metrics
 
